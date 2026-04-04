@@ -14,172 +14,374 @@
           colors: {
             ink: { 50: '#f6f7f9', 100: '#eceef2', 200: '#d5d9e2', 400: '#8d95a8', 600: '#4b5468', 800: '#1e2433', 900: '#0B1420' },
             cream: '#EDE6DB',
-            gold: '#C9A96E',
+            gold: { DEFAULT: '#C9A96E', light: '#D4BA88' }
+          },
+          fontFamily: {
+            display: ['"Playfair Display"', 'Georgia', 'serif'],
+            body: ['"DM Sans"', 'system-ui', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
           }
         }
       }
     }
   </script>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-    body { font-family: 'Inter', system-ui, sans-serif; }
+    @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap');
+
+    body { font-family: 'DM Sans', system-ui, sans-serif; }
+
+    /* Scroll fade-in */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                  transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Redaction blocks */
+    .redact-word {
+      position: relative;
+      display: inline-block;
+      white-space: nowrap;
+    }
+    .redact-word .overlay {
+      position: absolute;
+      inset: -2px -3px;
+      background: #0B1420;
+      border-radius: 3px;
+      transform: scaleX(0);
+      transform-origin: left center;
+    }
+    .redact-word.redacting .overlay {
+      animation: cover 0.4s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+    }
+    .redact-word.redacted .overlay {
+      transform: scaleX(1);
+    }
+    .redact-word.uncovering .overlay {
+      animation: uncover 0.4s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+    }
+    @keyframes cover {
+      from { transform: scaleX(0); transform-origin: left center; }
+      to   { transform: scaleX(1); transform-origin: left center; }
+    }
+    @keyframes uncover {
+      from { transform: scaleX(1); transform-origin: right center; }
+      to   { transform: scaleX(0); transform-origin: right center; }
+    }
+
+    /* Step connector arrow */
+    .step-connector {
+      position: relative;
+    }
+    .step-connector::after {
+      content: '\2192';
+      position: absolute;
+      top: 18px;
+      right: -18px;
+      font-size: 20px;
+      color: #d5d9e2;
+      line-height: 1;
+    }
+    @media (max-width: 639px) {
+      .step-connector::after { display: none; }
+    }
+
+    /* Subtle gold shimmer on hero title */
+    .hero-title {
+      background: linear-gradient(135deg, #0B1420 0%, #0B1420 70%, #C9A96E 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      padding-bottom: 0.1em;
+    }
+
+    /* Smooth anchor scroll */
+    html { scroll-behavior: smooth; }
   </style>
 </head>
 <body class="bg-white text-ink-800 antialiased">
 
   <!-- Nav -->
-  <nav class="max-w-5xl mx-auto px-6 py-6 flex items-center justify-between">
+  <nav class="max-w-6xl mx-auto px-8 py-8 flex items-center justify-between">
     <div class="flex items-center gap-3">
       <img src="icon.svg" alt="Dimkey" class="w-8 h-8 rounded-lg">
-      <span class="text-lg font-semibold">Dimkey</span>
+      <span class="text-lg font-semibold tracking-tight">Dimkey</span>
     </div>
-    <a href="#download" class="text-sm font-medium text-ink-600 hover:text-ink-800 transition">Download</a>
+    <a href="#download" class="text-sm font-medium text-ink-400 hover:text-ink-800 transition-colors duration-200">Download</a>
   </nav>
 
   <!-- Hero -->
-  <section class="max-w-5xl mx-auto px-6 pt-20 pb-16 text-center">
-    <h1 class="text-4xl sm:text-5xl font-bold leading-tight tracking-tight text-ink-900">
+  <section class="max-w-6xl mx-auto px-8 pt-24 pb-12 text-center">
+    <h1 class="hero-title font-display text-5xl sm:text-6xl lg:text-7xl font-semibold leading-[1.1] tracking-tight">
       Redact your documents<br>before AI sees them.
     </h1>
-    <p class="mt-6 text-lg text-ink-400 max-w-2xl mx-auto leading-relaxed">
-      Dimkey finds and masks sensitive data — names, IDs, financials, organizations — right on your device. No uploads. No cloud. Just clean files ready for ChatGPT, Claude, or any AI tool.
+    <p class="mt-8 text-lg sm:text-xl text-ink-400 max-w-2xl mx-auto leading-relaxed font-light">
+      Dimkey finds and masks sensitive data — names, IDs, financials, organizations — right on your device. No uploads. No cloud.
     </p>
-    <div class="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
-      <a href="#download" class="inline-flex items-center justify-center px-6 py-3 bg-ink-900 text-white text-sm font-medium rounded-lg hover:bg-ink-800 transition">
+    <div class="mt-12 flex flex-col sm:flex-row gap-4 justify-center">
+      <a href="#download" class="inline-flex items-center justify-center px-7 py-3.5 bg-ink-900 text-white text-sm font-medium rounded-xl hover:bg-ink-800 transition-colors duration-200">
         Download for macOS
       </a>
-      <a href="#download" class="inline-flex items-center justify-center px-6 py-3 border border-ink-200 text-ink-600 text-sm font-medium rounded-lg hover:border-ink-400 transition">
+      <a href="#download" class="inline-flex items-center justify-center px-7 py-3.5 border border-ink-200 text-ink-400 text-sm font-medium rounded-xl hover:border-ink-400 hover:text-ink-600 transition-all duration-200">
         Windows coming soon
       </a>
     </div>
   </section>
 
-  <!-- Screenshot placeholder -->
-  <section class="max-w-4xl mx-auto px-6 pb-20">
-    <div class="rounded-2xl border border-ink-100 bg-ink-50 aspect-video flex items-center justify-center">
-      <span class="text-ink-400 text-sm">Product screenshot</span>
+  <!-- Animated redaction demo -->
+  <section class="max-w-4xl mx-auto px-8 pt-8 pb-28 reveal">
+    <div class="rounded-2xl bg-ink-50/60 px-6 sm:px-10 py-8 sm:py-10">
+      <div class="flex items-center gap-2 mb-6">
+        <div class="w-2.5 h-2.5 rounded-full bg-ink-200"></div>
+        <div class="w-2.5 h-2.5 rounded-full bg-ink-200"></div>
+        <div class="w-2.5 h-2.5 rounded-full bg-ink-200"></div>
+        <span class="ml-3 text-xs text-ink-400 font-mono tracking-wide">contract_v3.docx</span>
+      </div>
+      <div id="demo-text" class="font-mono text-xs sm:text-sm leading-loose text-ink-600 select-none" aria-label="Animated redaction demonstration">
+        <span>Party A </span><span class="redact-word"><span class="text-ink-800 font-medium">James Whitfield</span><span class="overlay"></span></span><span> (ID </span><span class="redact-word"><span class="text-ink-800 font-medium">441302199501126078</span><span class="overlay"></span></span><span>) agrees to pay </span><span class="redact-word"><span class="text-ink-800 font-medium">$284,000</span><span class="overlay"></span></span><span> to </span><span class="redact-word"><span class="text-ink-800 font-medium">Meridian Ltd.</span><span class="overlay"></span></span>
+      </div>
+      <div class="mt-5 flex items-center gap-2 text-xs text-ink-400">
+        <span id="demo-status" class="inline-flex items-center gap-1.5 transition-opacity duration-300">
+          <span class="w-1.5 h-1.5 rounded-full bg-gold"></span>
+          <span>Scanning…</span>
+        </span>
+      </div>
     </div>
   </section>
 
   <!-- Trust bar -->
-  <section class="border-y border-ink-100 bg-ink-50">
-    <div class="max-w-5xl mx-auto px-6 py-10 flex flex-col sm:flex-row items-center justify-center gap-8 sm:gap-16 text-sm text-ink-600">
-      <div class="flex items-center gap-2">
-        <svg class="w-5 h-5 text-ink-400" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/></svg>
-        Your files never leave your device
+  <section class="reveal">
+    <div class="max-w-6xl mx-auto px-8 py-6 flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-16 text-sm text-ink-400">
+      <div class="flex items-center gap-2.5">
+        <svg class="w-4 h-4 text-ink-400/60" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/></svg>
+        Files never leave your device
       </div>
-      <div class="flex items-center gap-2">
-        <svg class="w-5 h-5 text-ink-400" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"/></svg>
-        Smart detection in seconds
+      <div class="flex items-center gap-2.5">
+        <svg class="w-4 h-4 text-ink-400/60" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"/></svg>
+        Detection in seconds
       </div>
-      <div class="flex items-center gap-2">
-        <svg class="w-5 h-5 text-ink-400" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"/></svg>
+      <div class="flex items-center gap-2.5">
+        <svg class="w-4 h-4 text-ink-400/60" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"/></svg>
         Excel, Word, PDF, CSV, TXT
       </div>
     </div>
   </section>
 
-  <!-- Features -->
-  <section class="max-w-5xl mx-auto px-6 py-24">
-    <h2 class="text-2xl font-bold text-center text-ink-900">How it works</h2>
-    <p class="mt-3 text-center text-ink-400 text-sm">Three steps. No account needed.</p>
+  <!-- How it works -->
+  <section class="max-w-6xl mx-auto px-8 py-32 reveal">
+    <h2 class="font-display text-3xl sm:text-4xl font-medium text-center text-ink-900 tracking-tight">How it works</h2>
+    <p class="mt-4 text-center text-ink-400 text-sm">Four steps. No account needed.</p>
 
-    <div class="mt-14 grid sm:grid-cols-3 gap-10">
-      <div class="text-center">
-        <div class="w-12 h-12 mx-auto rounded-xl bg-ink-50 border border-ink-100 flex items-center justify-center text-ink-400 text-lg font-semibold">1</div>
-        <h3 class="mt-5 font-semibold text-ink-800">Drop your file</h3>
-        <p class="mt-2 text-sm text-ink-400 leading-relaxed">Drag in a contract, financial report, or any document. Supports xlsx, docx, pdf, csv, and txt.</p>
+    <div class="mt-16 grid sm:grid-cols-4 gap-8 sm:gap-10">
+      <div class="text-center step-connector">
+        <div class="w-12 h-12 mx-auto rounded-xl bg-ink-50 flex items-center justify-center text-ink-400 text-base font-mono font-medium">01</div>
+        <h3 class="mt-6 font-semibold text-ink-800">Drop your file</h3>
+        <p class="mt-2.5 text-sm text-ink-400 leading-relaxed">Drag in a contract, report, or any document.</p>
+      </div>
+      <div class="text-center step-connector">
+        <div class="w-12 h-12 mx-auto rounded-xl bg-ink-50 flex items-center justify-center text-ink-400 text-base font-mono font-medium">02</div>
+        <h3 class="mt-6 font-semibold text-ink-800">Review detections</h3>
+        <p class="mt-2.5 text-sm text-ink-400 leading-relaxed">Names, IDs, phone numbers, companies — all highlighted. Adjust with one click.</p>
+      </div>
+      <div class="text-center step-connector">
+        <div class="w-12 h-12 mx-auto rounded-xl bg-ink-50 flex items-center justify-center text-ink-400 text-base font-mono font-medium">03</div>
+        <h3 class="mt-6 font-semibold text-ink-800">Export clean file</h3>
+        <p class="mt-2.5 text-sm text-ink-400 leading-relaxed">Get a redacted copy in the original format. Same layout, no sensitive data.</p>
       </div>
       <div class="text-center">
-        <div class="w-12 h-12 mx-auto rounded-xl bg-ink-50 border border-ink-100 flex items-center justify-center text-ink-400 text-lg font-semibold">2</div>
-        <h3 class="mt-5 font-semibold text-ink-800">Review what's found</h3>
-        <p class="mt-2 text-sm text-ink-400 leading-relaxed">Dimkey highlights names, IDs, phone numbers, company names, and more. Adjust or confirm with one click.</p>
-      </div>
-      <div class="text-center">
-        <div class="w-12 h-12 mx-auto rounded-xl bg-ink-50 border border-ink-100 flex items-center justify-center text-ink-400 text-lg font-semibold">3</div>
-        <h3 class="mt-5 font-semibold text-ink-800">Export clean file</h3>
-        <p class="mt-2 text-sm text-ink-400 leading-relaxed">Get a redacted copy in the original format. Same layout, no sensitive data. Ready to share with AI.</p>
+        <div class="w-12 h-12 mx-auto rounded-xl bg-gold/10 flex items-center justify-center text-gold text-base font-mono font-medium">04</div>
+        <h3 class="mt-6 font-semibold text-ink-800">Restore anytime</h3>
+        <p class="mt-2.5 text-sm text-ink-400 leading-relaxed">Need the original data back? Restore from your local mapping — only you can.</p>
       </div>
     </div>
   </section>
 
   <!-- What it detects -->
-  <section class="bg-ink-50 border-y border-ink-100">
-    <div class="max-w-5xl mx-auto px-6 py-24">
-      <h2 class="text-2xl font-bold text-center text-ink-900">What Dimkey detects</h2>
-      <p class="mt-3 text-center text-ink-400 text-sm">Three detection engines work together — regex, NER model, and custom dictionary.</p>
+  <section class="reveal">
+    <div class="max-w-6xl mx-auto px-8 py-32">
+      <h2 class="font-display text-3xl sm:text-4xl font-medium text-center text-ink-900 tracking-tight">What Dimkey detects</h2>
+      <p class="mt-4 text-center text-ink-400 text-sm">Three engines work in layers — regex, NER model, and your custom dictionary.</p>
 
-      <div class="mt-14 grid sm:grid-cols-2 gap-6 max-w-3xl mx-auto">
-        <div class="bg-white rounded-xl border border-ink-100 p-6">
+      <div class="mt-16 grid sm:grid-cols-2 gap-x-12 gap-y-8 max-w-4xl mx-auto">
+        <div class="pl-5 border-l-2 border-ink-100">
           <h3 class="font-semibold text-ink-800">Personal identity</h3>
-          <p class="mt-2 text-sm text-ink-400 leading-relaxed">Names, SSN, driver's license, passport numbers, addresses, phone numbers, email addresses</p>
+          <p class="mt-2 text-sm text-ink-400 leading-relaxed">Names, SSN, passport numbers, addresses, phone numbers, email addresses</p>
         </div>
-        <div class="bg-white rounded-xl border border-ink-100 p-6">
+        <div class="pl-5 border-l-2 border-ink-100">
           <h3 class="font-semibold text-ink-800">Organizations</h3>
-          <p class="mt-2 text-sm text-ink-400 leading-relaxed">Company names, EIN / tax IDs, institutional addresses, contract & case numbers</p>
+          <p class="mt-2 text-sm text-ink-400 leading-relaxed">Company names, tax IDs, institutional addresses, contract and case numbers</p>
         </div>
-        <div class="bg-white rounded-xl border border-ink-100 p-6">
+        <div class="pl-5 border-l-2 border-ink-100">
           <h3 class="font-semibold text-ink-800">Financial data</h3>
-          <p class="mt-2 text-sm text-ink-400 leading-relaxed">Bank accounts, IBAN, credit card numbers, salary figures, transaction amounts</p>
+          <p class="mt-2 text-sm text-ink-400 leading-relaxed">Bank accounts, credit card numbers, salary figures, transaction amounts</p>
         </div>
-        <div class="bg-white rounded-xl border border-ink-100 p-6">
+        <div class="pl-5 border-l-2 border-ink-100">
           <h3 class="font-semibold text-ink-800">Custom terms</h3>
-          <p class="mt-2 text-sm text-ink-400 leading-relaxed">Add your own sensitive terms with the built-in dictionary. Instant matching, you control what gets redacted.</p>
+          <p class="mt-2 text-sm text-ink-400 leading-relaxed">Add your own sensitive terms with the built-in dictionary. You control what gets redacted.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Use cases -->
-  <section class="max-w-5xl mx-auto px-6 py-24">
-    <h2 class="text-2xl font-bold text-center text-ink-900">Built for professionals who use AI</h2>
-
-    <div class="mt-14 grid sm:grid-cols-2 gap-8 max-w-3xl mx-auto">
-      <div class="rounded-xl border border-ink-100 p-8">
-        <div class="text-2xl">&#9878;</div>
-        <h3 class="mt-4 font-semibold text-ink-800">Legal</h3>
-        <p class="mt-2 text-sm text-ink-400 leading-relaxed">
-          Redact client names, case details, and privileged information before sending contracts or litigation files to AI for translation, review, or summarization.
-        </p>
+  <!-- Redact / Restore -->
+  <section class="reveal">
+    <div class="max-w-4xl mx-auto px-8 py-32 text-center">
+      <div class="inline-flex items-center gap-3 text-ink-400 mb-8">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7.5 21L3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5"/></svg>
       </div>
-      <div class="rounded-xl border border-ink-100 p-8">
-        <div class="text-2xl">&#128200;</div>
-        <h3 class="mt-4 font-semibold text-ink-800">Finance</h3>
-        <p class="mt-2 text-sm text-ink-400 leading-relaxed">
-          Mask account numbers, salary data, and company financials before using AI to analyze reports, invoices, or payroll records.
-        </p>
+      <h2 class="font-display text-3xl sm:text-4xl font-medium text-ink-900 tracking-tight">Redact now. Restore later.</h2>
+      <p class="mt-6 text-ink-400 leading-relaxed max-w-xl mx-auto">
+        Every redaction creates a local mapping file — an encrypted key that lets you reverse the process and recover the original data. The mapping never leaves your machine. No cloud. No key server. Only you can restore.
+      </p>
+    </div>
+  </section>
+
+  <!-- Use cases -->
+  <section class="reveal">
+    <div class="max-w-6xl mx-auto px-8 py-32">
+      <h2 class="font-display text-3xl sm:text-4xl font-medium text-center text-ink-900 tracking-tight">Built for professionals who use AI</h2>
+
+      <div class="mt-16 grid sm:grid-cols-3 gap-10 max-w-5xl mx-auto">
+        <div class="py-1">
+          <div class="text-xl text-ink-400">&#9878;</div>
+          <h3 class="mt-4 font-semibold text-ink-800">Legal</h3>
+          <p class="mt-2 text-sm text-ink-400 leading-relaxed">
+            Redact client names, case details, and privileged information before sending contracts to AI for review or summarization.
+          </p>
+        </div>
+        <div class="py-1">
+          <div class="text-xl text-ink-400">&#128200;</div>
+          <h3 class="mt-4 font-semibold text-ink-800">Finance</h3>
+          <p class="mt-2 text-sm text-ink-400 leading-relaxed">
+            Mask account numbers, salary data, and company financials before AI analysis of reports or invoices.
+          </p>
+        </div>
+        <div class="py-1">
+          <div class="text-xl text-ink-400">&#128218;</div>
+          <h3 class="mt-4 font-semibold text-ink-800">Consulting</h3>
+          <p class="mt-2 text-sm text-ink-400 leading-relaxed">
+            Strip client-specific details from deliverables, research data, and strategy documents before external AI processing.
+          </p>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- Download -->
-  <section id="download" class="bg-ink-900 text-white">
-    <div class="max-w-5xl mx-auto px-6 py-24 text-center">
-      <h2 class="text-2xl font-bold">Get Dimkey</h2>
-      <p class="mt-3 text-ink-400 text-sm">Free to use. No account required.</p>
+  <section id="download" class="bg-ink-900 text-white reveal">
+    <div class="max-w-6xl mx-auto px-8 py-28 text-center">
+      <h2 class="font-display text-3xl sm:text-4xl font-medium tracking-tight">Get Dimkey</h2>
+      <p class="mt-4 text-ink-400 text-sm">Free to use. No account required.</p>
 
-      <div class="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
-        <a href="#" class="inline-flex items-center justify-center gap-2 px-6 py-3 bg-white text-ink-900 text-sm font-medium rounded-lg hover:bg-ink-50 transition">
+      <div class="mt-12 flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="#" class="inline-flex items-center justify-center gap-2.5 px-7 py-3.5 bg-white text-ink-900 text-sm font-medium rounded-xl hover:bg-ink-50 transition-colors duration-200">
           <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
           Download for macOS
         </a>
-        <a href="#" class="inline-flex items-center justify-center gap-2 px-6 py-3 border border-ink-600 text-ink-400 text-sm font-medium rounded-lg hover:border-ink-400 hover:text-white transition cursor-default">
+        <a href="#" class="inline-flex items-center justify-center gap-2.5 px-7 py-3.5 border border-ink-600/40 text-ink-400 text-sm font-medium rounded-xl hover:border-ink-400 hover:text-white transition-all duration-200 cursor-default">
           <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M3 5.548l7.197-0.996v6.953H3V5.548zm0 12.904l7.197 0.996v-6.953H3v5.957zm8.003 1.104L21 21v-8.505h-9.997v8.061zm0-14.112v8.061H21V3L11.003 5.444z"/></svg>
           Windows — coming soon
         </a>
       </div>
 
-      <p class="mt-8 text-xs text-ink-400">
-        Requires macOS 11+ (Apple Silicon & Intel). Auto-updates included.
+      <p class="mt-10 text-xs text-ink-400/60">
+        Requires macOS 11+ (Apple Silicon &amp; Intel). Auto-updates included.
       </p>
     </div>
   </section>
 
   <!-- Footer -->
-  <footer class="max-w-5xl mx-auto px-6 py-8 flex items-center justify-between text-xs text-ink-400">
-    <span>&copy; 2025 Dimkey</span>
-    <a href="https://github.com/cube1/dimkey" class="hover:text-ink-600 transition">GitHub</a>
+  <footer class="max-w-6xl mx-auto px-8 py-10 flex items-center justify-between text-xs text-ink-400">
+    <span>&copy; 2026 Dimkey</span>
+    <a href="https://github.com/cube1/dimkey" class="hover:text-ink-600 transition-colors duration-200">GitHub</a>
   </footer>
+
+  <!-- Scripts -->
+  <script>
+    // Scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Redaction animation
+    (() => {
+      const words = document.querySelectorAll('.redact-word');
+      const status = document.getElementById('demo-status');
+      const statusDot = status.querySelector('span:first-child');
+      const statusText = status.querySelector('span:last-child');
+
+      function setStatus(text, color) {
+        statusText.textContent = text;
+        statusDot.className = 'w-1.5 h-1.5 rounded-full ' + color;
+      }
+
+      function sleep(ms) {
+        return new Promise(function(r) { setTimeout(r, ms); });
+      }
+
+      function clearAll() {
+        words.forEach(function(w) {
+          w.classList.remove('redacting', 'redacted', 'uncovering');
+        });
+      }
+
+      async function cycle() {
+        // Reset
+        clearAll();
+        setStatus('Scanning\u2026', 'bg-gold');
+
+        await sleep(1400);
+
+        // Redact one by one
+        setStatus('Redacting\u2026', 'bg-red-400');
+        for (var i = 0; i < words.length; i++) {
+          words[i].classList.add('redacting');
+          await sleep(400);
+        }
+        // Settle: swap animation class to static state
+        await sleep(100);
+        words.forEach(function(w) {
+          w.classList.remove('redacting');
+          w.classList.add('redacted');
+        });
+
+        setStatus(words.length + ' items redacted', 'bg-green-400');
+        await sleep(2400);
+
+        // Restore one by one
+        setStatus('Restoring\u2026', 'bg-gold');
+        await sleep(300);
+        for (var j = 0; j < words.length; j++) {
+          words[j].classList.remove('redacted');
+          words[j].classList.add('uncovering');
+          await sleep(350);
+        }
+
+        await sleep(200);
+        clearAll();
+
+        setStatus('Restored', 'bg-ink-400');
+        await sleep(2200);
+
+        cycle();
+      }
+
+      // Start after a brief delay
+      setTimeout(cycle, 800);
+    })();
+  </script>
 
 </body>
 </html>
