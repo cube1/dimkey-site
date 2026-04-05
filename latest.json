@@ -1,15 +1,15 @@
 {
-  "version": "0.5.1",
+  "version": "0.5.2",
   "notes": "请查看更新日志了解详细变更。",
-  "pub_date": "2026-04-04T14:31:21Z",
+  "pub_date": "2026-04-05T02:27:55Z",
   "platforms": {
     "darwin-aarch64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTcDM1ZGpwZ0M0dFZYN2NYQng1dURsRng3ZVlwdVVSNzhMMDNmTE1HcEtnZFpuN3llNmhnRzc4TytiWjIwR1hUeVcvWmRMMk1oRUpQVmZEWjVCd2hOZndZY3VudnhySncwPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzc1MzEyNzI5CWZpbGU6RGlta2V5LmFwcC50YXIuZ3oKWHBtTUpGYWI5UjJGUVFWNEpEa2ZKUkgzT0RybU4yN3hjVmFkQUZ0MnJIRzBMVnFvc3d0VWpxY3d0WVh1cC8rNjF5bGFzVno3ejk3WDZGam5idHRGQlE9PQo=",
-      "url": "https://github.com/cube1/dimkey-site/releases/download/v0.5.1/Dimkey.app.tar.gz"
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTcDM1ZGpwZ0M0dFRJZUlFYjhoTUpPUFpqSzB3MmpNQVV1QWxvcWpJamVYTDVNQWRDWHF3OFIzYzhWZXNuckllUnRPTnVFaEw5Q2VwRm8zNDJRUURMOTBOK1NadUE5aGdZPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzc1MzU0OTcyCWZpbGU6RGlta2V5LmFwcC50YXIuZ3oKUVNrTWFla1V5L1hRbHM4bXpNYzEwWlpwQjlzeGNheE80Qld1T1NXVUpiYXNKMTkwNEhGS2xvb1pYTkM1djdhL3doKzRzd2NFd3Q0WmFHREl2WFlQQ1E9PQo=",
+      "url": "https://github.com/cube1/dimkey-site/releases/download/v0.5.2/Dimkey.app.tar.gz"
     },
     "windows-x86_64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTcDM1ZGpwZ0M0dGNjTXE3ditOWHJzQ0p3WEJoWStTcUdOaVhuYkhtZHFYNFRiS2Y5eVZuRDhrTTVxMFZsbFYxTVFaMW5rL3RoSG1GdS9GbWtGOTdVUXNiakdWb1k3OXdFPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzc1MzEyOTYxCWZpbGU6RGlta2V5XzAuNS4xX3g2NC1zZXR1cC5uc2lzLnppcApPRHl5T3o2NVRUZURjb1JaU3JzMldaeUxSRU42c1MyUUErWklZTW1ZN1JtbHRBc1JSS3pSREVxTlMxcytDbmEyYURieHdNZVlRa2NsSmtjZWo3SXBDQT09Cg==",
-      "url": "https://github.com/cube1/dimkey-site/releases/download/v0.5.1/Dimkey_0.5.1_x64-setup.nsis.zip"
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTcDM1ZGpwZ0M0dFYxY29WbTVxU0xEc3J2ZFphUmFtV24zMzdGbFNyenFBVVQyMVZTUGsvZUk3UnlFVVU5Z3k0bklocnV4REc0SnpaNWhXTWlDV2E1SU5EdmxnaUtQQWdJPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzc1MzU1OTE4CWZpbGU6RGlta2V5XzAuNS4yX3g2NC1zZXR1cC5uc2lzLnppcApndkJIbEhzWWRJaXhvam9DN1JCcldTWmZoRXFVNWN6SWFYMmZONkJDdk9GRU14YzdKUFd4TzNlQUwzVmFzeU95U2tGTXdHZW8vMFVPN1NuemhpaTJBdz09Cg==",
+      "url": "https://github.com/cube1/dimkey-site/releases/download/v0.5.2/Dimkey_0.5.2_x64-setup.nsis.zip"
     }
   }
 }
