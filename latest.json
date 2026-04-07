@@ -1,15 +1,11 @@
 {
-  "version": "0.5.2",
+  "version": "0.6.0",
   "notes": "请查看更新日志了解详细变更。",
-  "pub_date": "2026-04-05T02:28:12Z",
+  "pub_date": "2026-04-07T15:40:16Z",
   "platforms": {
-    "darwin-aarch64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTcDM1ZGpwZ0M0dFRJZUlFYjhoTUpPUFpqSzB3MmpNQVV1QWxvcWpJamVYTDVNQWRDWHF3OFIzYzhWZXNuckllUnRPTnVFaEw5Q2VwRm8zNDJRUURMOTBOK1NadUE5aGdZPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzc1MzU0OTcyCWZpbGU6RGlta2V5LmFwcC50YXIuZ3oKUVNrTWFla1V5L1hRbHM4bXpNYzEwWlpwQjlzeGNheE80Qld1T1NXVUpiYXNKMTkwNEhGS2xvb1pYTkM1djdhL3doKzRzd2NFd3Q0WmFHREl2WFlQQ1E9PQo=",
-      "url": "https://github.com/cube1/dimkey-site/releases/download/v0.5.2/Dimkey.app.tar.gz"
-    },
     "windows-x86_64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTcDM1ZGpwZ0M0dFYxY29WbTVxU0xEc3J2ZFphUmFtV24zMzdGbFNyenFBVVQyMVZTUGsvZUk3UnlFVVU5Z3k0bklocnV4REc0SnpaNWhXTWlDV2E1SU5EdmxnaUtQQWdJPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzc1MzU1OTE4CWZpbGU6RGlta2V5XzAuNS4yX3g2NC1zZXR1cC5uc2lzLnppcApndkJIbEhzWWRJaXhvam9DN1JCcldTWmZoRXFVNWN6SWFYMmZONkJDdk9GRU14YzdKUFd4TzNlQUwzVmFzeU95U2tGTXdHZW8vMFVPN1NuemhpaTJBdz09Cg==",
-      "url": "https://github.com/cube1/dimkey-site/releases/download/v0.5.2/Dimkey_0.5.2_x64-setup.nsis.zip"
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTcDM1ZGpwZ0M0dGFJNmtZWW4reWVQNmNWRU9kbGQ5a2dob0s5NURHSFJNOEhha20wNWVEYkZjQnRLSGxuSk9vTjErWDk0ZmI2YlNrRDVxbnEyUEpqK3E4QlAwNGlqTmdrPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzc1NTc2Mjk0CWZpbGU6RGlta2V5XzAuNi4wX3g2NC1zZXR1cC5uc2lzLnppcApEbTMwZVB2Z1YzMC9PVWVveHdmRkxBWHFJaXFMMzlLRDlVK1pHZ1pzSFJzQVZQeTk2OFdoTDJ0ODUwZzc2dG1Ddk5EVFNvV056TEtVdzZ1Zk1JQTZDUT09Cg==",
+      "url": "https://github.com/cube1/dimkey-site/releases/download/v0.6.0/Dimkey_0.6.0_x64-setup.nsis.zip"
     }
   }
 }
